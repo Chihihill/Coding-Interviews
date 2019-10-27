@@ -161,7 +161,7 @@
     }
     allOver18; //false
 ```
-7. ·Array.some()`方法检查**某些**数组值是否通过了测试,**返回boolean**
+7. `Array.some()`方法检查**某些**数组值是否通过了测试,**返回boolean**
 该函数有 3 个参数：项目值、项目索引、数组本身
 ```javascript
     var numbers = [45, 4, 9, 16, 25];

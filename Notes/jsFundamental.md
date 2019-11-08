@@ -325,3 +325,338 @@ JavaScript 自动调用变量的 toString() 函数，当您试图“输出”对
 `n*`	匹配任何包含零个或多个 n 的字符串。	
 `n?`	匹配任何包含零个或一个 n 的字符串。
 - RegExp 对象
+- `test()`
+`test()` 是一个正则表达式方法。
+它通过模式来搜索字符串，然后根据结果返回 `true `或 `false`。
+```javascript
+    var pattern = /e/;
+    pattern.test("The best things in life are free!");//true
+```
+- `exec()`
+`exec()` 方法是一个正则表达式方法。
+它通过指定的模式（`pattern`）搜索字符串，并返回已找到的文本。
+```javascript
+    var pattern = /e/;
+    var obj = pattern.exec("The best things in life are free!");
+    obj
+    //["e", index: 2, input: "The best things in life are free!", groups: undefined]
+    obj[0]
+    //"e"
+    obj.index
+    //2
+    obj.input
+    //"The best things in life are free!"
+```
+---
+##### 8.异常
+`try` 语句使您能够测试代码块中的错误。
+
+`catch` 语句允许您处理错误。
+
+`throw `语句允许您创建自定义错误。
+
+`finally `使您能够执行代码，在 `try` 和 `catch `之后，无论结果如何。
+
+###### try-catch语句
+- 把所有可能抛出错误的代码放在`try{}`语块中，把用于错误处理的语句放在`catch{}`中
+```javascript
+    try{
+        //可能会导致错误的代码
+    } catch(error){
+        //在错误发生时怎么处理
+    }
+```
+如果`try{}`中任何代码发生了错误，就会立即退出代码执行过程，然后执行`catch{}`。
+
+然后`catch{}`会接收到一个包含错误信息的对象，这个对象必须有名字，并且有包含错误信息的`message`属性，`name`属性保存错误类型。
+
+所有浏览器都支持`message`属性，跨浏览器时最好只使用`message`属性。
+```javascript
+    try{
+        window.somenonexistentFunction();
+    } catch(error){
+        alert(error.message);
+    }
+```
+- `finally`总是会被执行
+```javascript
+    try{
+        //可能会导致错误的代码
+    } catch(error){
+        //在错误发生时怎么处理
+    } finally{
+        无论 try / catch 结果如何都执行的代码块
+    }
+```
+- 错误类型
+1 `Error `基类型，其他错误类型都继承自该类型，错误对象中的方法全是默认的对象方法,基类型的主要目的是供开发人员抛出自定义错误。
+2 `EvalError `在使用 `eval()`函数而发生异常时被抛出，即如果没有把 `eval()`当成函数调用，就会抛出错误。`eval()`可以计算`String`表达式
+`new eval(); //抛出 EvalError`
+`eval = foo;//抛出 EvalError `
+3 `RangeError ` ：数值超出范围时触发
+4 `ReferenceError ` ：找不到对象的情况下触发
+5 `SyntaxError ` ：有语法错误的代码传入`eval()`时触发
+6 `TypeError ` ：变量类型不符合要求
+7 `URIError` ：`encodeURI()` `decodeURI()` `URI`格式不正确
+```javascript
+    try { 
+        someFunction(); 
+    } catch (error){ 
+        if (error instanceof TypeError){ 
+            //处理类型错误 
+        } else if (error instanceof ReferenceError){ 
+            //处理引用错误 
+        } else { 
+            //处理其他类型的错误 
+        }
+    }
+```
+- 抛出错误
+当发生错误时，`JavaScript `通常会停止并产生错误消息，即`JavaScript `将抛出异常（抛出错误）。
+`JavaScript` 实际上会创建带有两个属性的 `Error` 对象：`name` 和 `message`。
+
+**throw**
+抛随时出自定义错误，必须给定`throw`操作符一个指定的值，值的类型无要求。
+
+在遇到`throw`操作符时，代码立即停止执行。当且仅当`try-catch`捕获到被抛出的值时，代码才会继续被执行。
+```javascript
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>请输入 5 到 10 之间的数字：</p>
+
+<input id="demo" type="text">
+<button type="button" onclick="myFunction()">检测输入</button>
+
+<p id="p01"></p>
+
+<script>
+function myFunction() {
+  var message, x;
+  message = document.getElementById("p01");
+  message.innerHTML = "";
+  x = document.getElementById("demo").value; //input value
+  try { 
+    if(x == "")  throw "是空的";
+    if(isNaN(x)) throw "不是数字";
+    x = Number(x);
+    if(x > 10)   throw "太大";
+    if(x < 5)  throw "太小";
+  }
+  catch(err) {
+    message.innerHTML = "输入：" + err;
+  }
+  finally {
+    document.getElementById("demo").value = "";
+  }
+}
+</script>
+
+</body>
+</html>
+```
+----
+##### 9.作用域
+1. 作用域是指有权访问的变量集合，`js`中有两种作用域：
+    - 局部作用域
+    - 全局作用域
+`js`中函数会创建自己的作用域，函数内部定义的变量从函数外部是无法访问的。
+
+2. 局部变量：在函数中使用`var`声明的变量，只能在函数内部访问，从函数外部是无法访问的。
+   - 可以在不同函数中声明同名的局部变量。
+  
+
+3. 全局变量：函数之外声明的变量
+   - 全局变量的作用域是全局的：网页的所有脚本和函数都能够访问它。
+   - **自动全局：如果您为尚未声明的变量赋值，此变量会自动成为全局变量。**
+   - 在“严格模式”中不会自动创建全局变量。
+   - 在 HTML 中，全局作用域是 window。所有全局变量均属于 window 对象。
+
+- 局部变量会在函数完成时被删除。
+- 全局变量会在您关闭页面是被删除。
+- 函数参数也是函数内的局部变量。
+---
+##### 10.提升Hoisting
+- 在 JavaScript 中，可以在使用变量之后对其进行声明。即可以在声明变量之前使用它。
+- `js`中`var a = 1;` => `var a; a = 1;`
+- **函数提升在变量提升之上**
+- Hoisting 是 JavaScript 将所有声明提升到**当前作用域**顶部的默认行为
+- 用 `let `或 `const` 声明的变量和常量不会被提升
+- 始终在每个作用域的开头声明所有变量!
+- 严格模式中不允许使用未声明的变量
+----
+##### 11.严格模式
+- `"use strict"; `定义 `JavaScript` 代码应该以“严格模式”执行。
+- 在严格模式中，不能使用未声明的变量
+- `"use strict"` 指令只能在脚本或函数的开头被识别
+```javascript
+    "use strict";
+    myFunction();
+
+    function myFunction() {
+        y = 3.14;   // 这会引发错误，因为 y 尚未声明
+    }
+```
+- 在函数中声明严格模式，拥有局部作用域（只有函数中的代码以严格模式执行）：
+```javascript
+    x = 3.14;       // 这不会引发错误
+    myFunction();
+
+    function  myFunction() {
+        "use strict";
+        y = 3.14;   // 这会引发错误
+    }
+```
+- 在严格模式中，错误输入变量名不会创建新的全局变量，而是会抛出错误。向不存在的变量赋值也会抛出错误。
+在严格模式中，向不可写的、只能读取的、不存在的属性赋值，或者向不存在的变量或对象赋值，将抛出错误。
+具体情况参考 - [严格模式w3school](https://www.w3school.com.cn/js/js_strict.asp)
+
+---
+##### 12.this
+1. 在方法中，`this`指的是方法的拥有者对象
+```javascript
+    var person = {
+    firstName: "Bill",
+    lastName : "Gates",
+    id       : 678,
+    fullName : function() {
+        return this.firstName + " " + this.lastName;
+    }
+    };
+```
+2. 在函数中，`this`指的是全局对象，严格模式下`this`是`undefined`
+在 `JavaScript` 函数中，函数的拥有者默认绑定 `this`。
+
+3. 在（`DOM`）事件中，指的是接收此事件的元素
+```javascript
+    <button onclick="this.style.display='none'">
+    点击来删除我！
+    </button>
+```
+4. 单独使用，指的是全局对象
+- 对象方法绑定
+`var person = {
+  firstName  : "Bill"}`
+`this.firstName`
+- 显式函数绑定 `call()`，`apply()`
+```javascript
+    var person1 = {
+    fullName: function() {
+        return this.firstName + " " + this.lastName;
+    }
+    }
+    var person2 = {
+    firstName:"Bill",
+    lastName: "Gates",
+    }
+    person1.fullName.call(person2);  // 会返回 "Bill Gates"
+```
+##### 13.let & const
+`let`和`const`为j`s`提供了块级作用域变量，在这之前`js`只有全局作用域和函数作用域。
+- 全局（在函数之外）声明的变量拥有全局作用域。全局变量可以在 JavaScript 程序中的任何位置访问。
+- 局部（函数内）声明的变量拥有函数作用域。局部变量只能在它们被声明的函数内访问。
+###### let
+**块级作用域**
+- 通过`var`声明的变量没有块级作用域。
+- 为什么要使用`let`和`const`？
+    重新声明变量：
+    使用 var 关键字重新声明变量会带来问题。
+    在块中重新声明变量也将重新声明块外的变量：
+```javascript
+    var x = 10;
+    // 此处 x 为 10
+    { 
+    var x = 6;
+    // 此处 x 为 6
+    }
+    // 此处 x 为 6
+```
+而使用`let`没有这个问题,使用` let `关键字重新声明变量可以解决这个问题。
+在块中重新声明变量不会重新声明块外的变量：
+```javascript
+    var x = 10;
+    // 此处 x 为 10
+    {
+        let x = 6;
+        // 此处 x 为 6
+    }
+    // 此处 x 为 10
+```
+- 循环作用域
+
+`var`
+```javascript
+    var i = 7;
+    for (var i = 0; i < 10; i++) {
+    // 一些语句
+    }
+    // 此处，i 为 10
+```
+`let`
+```javascript
+    let i = 7;
+    for (let i = 0; i < 10; i++) {
+    // 一些语句
+    }
+    // 此处 i 为 7
+```
+- 在全局作用域和函数作用域中两者相似
+- `HTML`中的全局变量
+在`HTML`中全局作用域是window对象
+
+通过 `var` 关键词定义的全局变量属于 `window `对象
+```javascript
+    var carName = "porsche";
+    // 此处的代码可使用 window.carName
+```
+通过 `let `关键词定义的全局变量不属于 `window `对象
+```javascript
+    let carName = "porsche";
+    // 此处的代码不可使用 window.carName
+```
+- 重新声明
+    - 允许在程序的任何位置使用 `var` 重新声明 `JavaScript` 变量
+    - 在相同的作用域，或在相同的块中，通过` let `重新声明一个 `var `变量是不允许的
+    - 在相同的作用域，或在相同的块中，通过 `let `重新声明一个`let `变量是不允许的在相同的作用域，或在相同的块中，通过 `var `重新声明一个 `let `变量是不允许的
+    - 在不同的作用域或块中，通过 let 重新声明变量是允许的
+- 提升
+   -  通过` var `声明的变量会提升到顶端，可以在声明变量之前就使用它。
+   - 通过 `let `定义的变量不会被提升到顶端。在声明 `let `变量之前就使用它会导致` ReferenceError`。
+
+###### const
+- 在块作用域内使用 const 声明的变量与 let 变量相似。
+- 通过 `const `定义的变量与 `let` 变量类似，但**不能重新赋值**：
+```javascript
+    const PI = 3.141592653589793;
+    PI = 3.14;      // 会出错
+    PI = PI + 10;   // 也会出错
+```
+- `JavaScript` `const `变量必须在**声明时赋值**：
+```javascript
+    //wrong
+    //const PI;
+    //PI = 3.14159265359;
+
+    //correct
+    const PI = 3.14159265359;
+```
+- 不可以改变常量值，但可以改变常量对象
+```javascript
+    // 您可以创建 const 对象：
+    const car = {type:"porsche", model:"911", color:"Black"};
+
+    // 您可以更改属性：
+    car.color = "White";
+
+    // 您可以添加属性：
+    car.owner = "Bill";
+
+    // ERROR
+    const car = {type:"porsche", model:"911", color:"Black"};
+    car = {type:"Volvo", model:"XC60", color:"White"};    // ERROR
+```
+- 重新声明
+在不同的作用域或块中重新声明 `const `是允许的。
+- 提升
+通过 `const` 定义的变量不会被提升到顶端。`const `变量不能在声明之前使用。

@@ -1,4 +1,6 @@
 [toc]
+
+----
 ##### 1.逻辑运算符
 
 1. 或 ||
@@ -660,3 +662,185 @@ function myFunction() {
 在不同的作用域或块中重新声明 `const `是允许的。
 - 提升
 通过 `const` 定义的变量不会被提升到顶端。`const `变量不能在声明之前使用。
+
+-----
+##### 样式指南
+[代码规范](https://github.com/Chihihill/spec/blob/master/javascript-style-guide.md)
+用字符串-字符串返回`NaN`
+`==` 比较运算符总是在比较之前进行类型转换（以匹配类型）。
+
+`===` 运算符会强制对值和类型进行比较。
+`switch` `'10' != 10`
+
+带有命名索引的数组被称为关联数组（或散列）。
+
+`JavaScript `不支持带有命名索引的数组。
+
+在` JavaScript `中，数组使用数字索引。
+
+在 `JavaScript` 中，对象使用命名索引。
+
+如果您使用命名索引，那么在访问数组时，`JavaScript` 会将数组重新定义为标准对象。
+
+在自动重定义之后，数组方法或属性将产生未定义或非正确的结果
+```javascript
+    var person = [];
+    person["firstName"] = "Bill";
+    person["lastName"] = "Gates";
+    person["age"] = 46;
+    var x = person.length;         // person.length 将返回 0
+    var y = person[0];              // person[0] 将返回 undefined
+```
+`null` is an object, but undefined is not an object
+We can use `typeof myobj === 'undefined' `to identify the object exist or not.
+But we cannot use `typeof myobj === 'null'`, becasue if the object is not identifyed, there would be sth wrong.
+
+[判断对象是否存在](https://www.cnblogs.com/pekkle/p/7196024.html)
+
+-------
+##### js性能
+
+- 减少循环中的活动
+```javascript
+    var i = 0;
+    var I = arr.length;
+    for(i; i < I; i++){}
+```
+- 减少DOM访问
+把DOM元素变成本地变量
+```javascript
+    var obj = document.getElementById("demo");
+    obj.innerText = 'hello';
+```
+- 缩减DOM规模
+减少页面中的DOM元素数量，所以，每次搜索DOM元素都能减少时间。
+- 避免不必要的变量
+避免不打算储值的变量
+```javascript
+    var fullName = firstName + " " + lastName;
+    document.getElementById("demo").innerHTML = fullName; 
+
+    //===>
+    document.getElementById("demo").innerHTML = firstName + " " + lastName;
+```
+- 延迟 JavaScript 加载
+请把脚本放在页面底部，使浏览器首先加载页面。
+`HTTP `规范定义浏览器不应该并行下载超过两种要素。
+在`script`标签中使用 `defer=“true”`
+`defer `属性规定了脚本应该在页面完成解析后执行，但它只适用于外部脚本。
+`window.onload = downScripts;`
+- 避免使用 `with`
+
+##### ES5
+`String.trim()` 删除字符串两端的空白字符。
+```javascript
+    var str = "       Hello World!        ";
+    alert(str.trim());
+```
+- `JSON.parse()`
+JavaScript 函数 JSON.parse() 用于将文本转换为 JavaScript 对象：
+```javascript
+    var obj = JSON.parse('{"name":"Bill", "age":62, "city":"Seatle"}');
+```
+- `JSON.stringify()`
+- `Date.now()`
+`Date.now() `返回自零日期（`1970 年 1 月 1 日 00:00:00:00`）以来的毫秒数。
+- `Object.defineProperty()`
+允许定义对象属性和/或更改属性的值和/或元数据。
+```javascript
+    // 创建对象：
+    var person = {
+    firstName: "Bill",
+    lastName : "Gates",
+    language : "NO", 
+    };
+
+    // 更改属性：
+    Object.defineProperty(person, "language", {
+    value: "EN",
+    writable : true,
+    enumerable : true,
+    configurable : true
+    });
+
+    // 枚举属性
+    var txt = "";
+    for (var x in person) {
+    txt += person[x] + "<br>";
+    }
+    document.getElementById("demo").innerHTML = txt;
+```
+```javascript
+    // 创建对象：
+    var person = {
+    firstName: "Bill",
+    lastName : "Gates",
+    language : "NO"
+    };
+
+    // 更改属性：
+    Object.defineProperty(person, "language", {
+    get : function() { return language },
+    set : function(value) { language = value.toUpperCase()}
+    });
+
+    // 更改语言
+    person.language = "en";
+
+    // 显示语言
+    document.getElementById("demo").innerHTML = person.language;
+```
+- `charAt()`
+-----
+##### ES6
+-----
+##### JSON
+
+`JSON` 是存储和传输数据的格式。
+`JSON` 经常在数据从服务器发送到网页时使用。
+
+`JSON` 指的是 `JavaScript Object Notation`
+`JSON `是轻量级的数据交换格式
+`JSON` 独立于语言` *`;* JSON 的语法是来自 JavaScript 对象符号的语法，但 JSON 格式是纯文本。读取和生成 JSON 数据的代码可以在任何编程语言编写的。
+`JSON` 是“自描述的”且易于理解
+```json
+{
+"employees":[
+    {"firstName":"Bill", "lastName":"Gates"}, 
+    {"firstName":"Steve", "lastName":"Jobs"},
+    {"firstName":"Alan", "lastName":"Turing"}
+]
+}
+```
+
+`JSON` 格式评估为 `JavaScript` 对象
+`JSON` 格式在语法上与创建 `JavaScript` 对象的代码相同。
+由于这种相似性，`JavaScript` 程序可以很容易地将 `JSON `数据转换成本地的 `JavaScript` 对象。
+
+**JSON 语法规则**
+数据是名称/值对
+数据由逗号分隔
+花括号保存对象
+方括号保存数组
+
+**把 JSON 文本转换为 JavaScript 对象**
+1. 创建包含JSON格式的javascript字符串
+```javascript
+var text = '{ "employees" : [' +
+'{ "firstName":"Bill" , "lastName":"Gates" },' +
+'{ "firstName":"Steve" , "lastName":"Jobs" },' +
+'{ "firstName":"Alan" , "lastName":"Turing" } ]}';
+```
+2. 使用`javascript`内建函数，`JSON.prase()`，把字符串转换为javascript对象
+```javascript
+var obj = JSON.prase(text);
+```
+3. 使用新对象
+```javascript
+<p id="demo"></p>
+
+<script>
+document.getElementById("demo").innerHTML =
+obj.employees[1].firstName + " " + obj.employees[1].lastName;
+</script> 
+```

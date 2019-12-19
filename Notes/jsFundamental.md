@@ -664,7 +664,7 @@ function myFunction() {
 通过 `const` 定义的变量不会被提升到顶端。`const `变量不能在声明之前使用。
 
 -----
-##### 样式指南
+##### 14.样式指南
 [代码规范](https://github.com/Chihihill/spec/blob/master/javascript-style-guide.md)
 用字符串-字符串返回`NaN`
 `==` 比较运算符总是在比较之前进行类型转换（以匹配类型）。
@@ -698,7 +698,7 @@ But we cannot use `typeof myobj === 'null'`, becasue if the object is not identi
 [判断对象是否存在](https://www.cnblogs.com/pekkle/p/7196024.html)
 
 -------
-##### js性能
+##### 15.js性能
 
 - 减少循环中的活动
 ```javascript
@@ -731,7 +731,7 @@ But we cannot use `typeof myobj === 'null'`, becasue if the object is not identi
 `window.onload = downScripts;`
 - 避免使用 `with`
 
-##### ES5
+##### 16.ES5
 `String.trim()` 删除字符串两端的空白字符。
 ```javascript
     var str = "       Hello World!        ";
@@ -792,9 +792,9 @@ JavaScript 函数 JSON.parse() 用于将文本转换为 JavaScript 对象：
 ```
 - `charAt()`
 -----
-##### ES6
+##### 17.ES6
 -----
-##### JSON
+##### 18.JSON
 
 `JSON` 是存储和传输数据的格式。
 `JSON` 经常在数据从服务器发送到网页时使用。
@@ -843,4 +843,273 @@ var obj = JSON.prase(text);
 document.getElementById("demo").innerHTML =
 obj.employees[1].firstName + " " + obj.employees[1].lastName;
 </script> 
+```
+------
+##### 19.JS表单
+HTML 表单验证能够通过 JavaScript 来完成。
+
+- 如果某个表单字段（fname）是空的，那么该函数会发出一条警告消息，并返回 false，以防止表单被提交出去：
+```javascript
+<form name="myForm" action="/action_page_post.php" onsubmit="return validateForm()" method="post">
+姓名：<input type="text" name="fname">
+<input type="submit" value="Submit">
+</form>
+
+function validateForm() {
+    var x = document.forms["myForm"]["fname"].value;
+    //document.forms[表单名][输入框名]
+    if (x == "") {
+        alert("必须填写姓名");
+        return false;//防止表单被提交
+    }
+}
+```
+- 验证1-10之间的数字
+```javascript
+function(){
+var x, text;
+x = document.getElementById("name").value;
+if(isNaN(x) || x < 1 || x > 10){
+    text = "invalid input";
+} else {
+    text = "valid input";
+}
+}
+```
+
+- 如果表单字段（fname）是空的，required 属性防止表单被提交：
+```javascript
+<form action="/action_page_post.php" method="post">
+   <input type="text" name="fname" required>//required
+   <input type="submit" value="Submit">
+</form>
+```
+
+**数据验证**
+数据验证指的是确保干净、正确和有用的用户输入的过程。
+
+典型的验证任务是：
+
+用户是否已填写所有必需的字段？
+用户是否已输入有效的日期？
+用户是否在数字字段中输入了文本？
+大多数情况下，数据验证的作用是确保正确的用户输入。
+
+验证可以通过很多不同的方法来定义，并且可以使用很多不同的方法来开发。
+
+服务器端验证是由 web 服务器执行的，在输入被送往服务器之后。
+
+客户端验证是由 web 浏览器执行的，在输入被送往 web 服务器之前。
+
+**HTML 约束验证**
+HTML5 引入了一种新的 HTML 验证概念，名为约束验证（constraint validation）。
+
+- HTML 约束验证基于：
+约束验证 HTML 输入属性
+约束验证 CSS 伪选择器
+约束验证 DOM 属性和方法
+`disabled`	规定 input 元素应该被禁用
+`max`	规定 input 元素的最大值
+`min`	规定 input 元素的最小值
+`pattern`	规定 input 元素的值模式
+`required`	规定输入字段需要某个元素
+`type`	规定 input 元素的类型
+
+- 约束验证 CSS 伪选择器
+`:disabled`	选择设置了 "disabled" 属性的 input 元素。
+`:invalid	`选择带有无效值的 input 元素。
+`:optional`	选择未设置 "required" 属性的 input 元素。
+`:required`	选择设置了 "required" 属性的 input 元素。
+`:valid	`选择带有有效值的 input 元素。
+----
+##### 20.表单API
+- 约束验证 DOM 方法
+`checkValidity()`	返回 true，如果 input 元素包含有效数据
+`setCustomValidity()`	设置 input 元素的 validationMessage 属性
+```javascript
+<input id="id1" type="number" min="100" max="300" required>
+<button onclick="myFunction()">OK</button>
+
+<p id="demo"></p>
+
+<script>
+ function myFunction() {
+    var inpObj = document.getElementById("id1");
+    if (inpObj.checkValidity() == false) {
+        document.getElementById("demo").innerHTML = inpObj.validationMessage;
+        //validationMessage会显示具体输入错误信息
+    }
+}
+</script>
+```
+- 约束验证 DOM 属性
+`validity	`包含与 input 元素的合法性相关的布尔属性。
+`validationMessage`	包含当 validity 为 false 时浏览器显示的消息。
+`willValidate`	指示是否验证 input 元素。
+
+- 合法性属性
+input 元素的 validity 属性包含了与数据合法性相关的一系列属性：
+1`customError`	设置为 true，如果设置自定义的合法性消息。
+2`patternMismatch`	设置为 true，如果元素值不匹配其 pattern 属性。
+3`rangeOverflow`	设置为 true，如果元素值大约其 max 属性。
+4`rangeUnderflow`	设置为 true，如果元素值小于其 min 属性。
+5`stepMismatch`	当字段拥有 step 属性，且输入的 value 值不符合设定的间隔值时，该属性值为 true。
+6`tooLong`	设置为 true，如果元素值超过了其 maxLength 属性。
+7`typeMismatch`	当字段的 type 是 email 或者 url 但输入的值不是正确的类型时，属性值为 true。
+8`valueMissing`	设置为 true，如果元素（包含 required）没有值。
+9`valid`	设置为 true，如果元素值是有效的。
+
+- **rangeOverflow**
+```javascript
+<input id="id1" type="number" max="100">
+<button onclick="myFunction()">OK</button>
+
+<p id="demo"></p>
+
+<script>
+function myFunction() {
+    var txt = "";
+    if (document.getElementById("id1").validity.rangeOverflow) {
+        //rangeOverflow
+        txt = "值太大";
+    }
+     document.getElementById("demo").innerHTML = txt;
+}
+</script> 
+```
+----
+#### 21.对象Object
+##### 定义
+所有 `JavaScript` 值，除了原始值，都是对象。
+- JS原始值
+没有属性和方法
+原始数据类型指的是拥有原始值的数据。
+5重原始数据类型：`string`,`number`,`boolean`,`null`,`undefined`
+- 对象是包含变量的变量
+JavaScript 对象是命名值的集合。
+```javascript
+var person = {firstName:"Bill", lastName:"Gates", age:62, eyeColor:"blue"};
+```
+- 对象属性
+JavaScript 对象中的命名值，被称为属性。
+- 对象方法
+方法是可以在对象上执行的动作。
+对象属性可以是原始值、其他对象以及函数。
+对象方法是包含函数定义的对象属性。
+
+**创建 JavaScript 对象**
+有不同的方法来创建对象：
+定义和创建单个对象，使用对象文字。
+定义和创建单个对象，通过关键词 new。
+定义对象构造器，然后创建构造类型的对象。
+在 ECMAScript 5 中，也可以通过函数 Object.create() 来创建对象。
+1. 使用对象字面量
+```javascript
+var person = {firstName:"Bill", lastName:"Gates", age:62, eyeColor:"blue"};
+///
+var person = {
+    firstName:"Bill",
+    lastName:"Gates",
+    age:62,
+    eyeColor:"blue"
+};
+```
+2. 使用 JavaScript 关键词 new
+```javascript
+var person = new Object();
+person.firstName = "Bill";
+person.lastName = "Gates";
+person.age = 50;
+person.eyeColor = "blue"; 
+```
+**JavaScript 对象是易变的**
+对象是易变的：它们通过引用来寻址，而非值。
+
+如果 person 是一个对象，下面的语句不会创建 person 的副本：
+
+`var x = person; ` // 这不会创建 person 的副本。
+对象 x 并非 person 的副本。它就是 person。x 和 person 是同一个对象。
+
+对 x 的任何改变都将改变 person，因为 x 和 person 是相同的对象。
+```javascript
+var person = {firstName:"Bill", lastName:"Gates", age:62, eyeColor:"blue"}
+ 
+var x = person;
+x.age = 10;           // 这将同时改变 both x.age 和 person.age
+```
+**JavaScript 变量不是易变的。只有 JavaScript 对象如此。**
+
+##### 属性
+属性指的是与 JavaScript 对象相关的值。
+JavaScript 对象是无序属性的集合。
+属性通常可以被修改、添加和删除，但是某些属性是只读的。
+- 访问 JavaScript 属性
+`object.propertyName`
+`object['propertyName']`
+`objectName[expression]       // x = "age"; person[x]`
+表达式必须计算为属性名:
+`person.firstname + " is " + person.age + " years old.";`
+`person["firstname"] + " is " + person["age"] + " years old.";`
+
+**for in 循环**
+JavaScript for...in 语句遍历对象的属性。
+```javascript
+var person = {fname:"Bill", lname:"Gates", age:62}; 
+
+for (x in person) {
+    txt += person[x];
+}
+```
+
+**添加新属性**
+`person.nationality = "English";`
+
+**删除属性**
+```javascript
+var person = {firstName:"Bill", lastName:"Gates", age:62, eyeColor:"blue"};
+delete person.age;   // 或 delete person["age"];
+```
+delete 关键词会同时删除属性的值和属性本身。
+delete 关键词不会删除被继承的属性，但是如果您删除了某个原型属性，则将影响到所有从原型继承的对象。
+
+##### 方法
+包含函数定义的属性
+
+**this**
+在 JavaScript 中，被称为 this 的事物，指的是拥有该 JavaScript 代码的对象。
+- 创建对象方法
+`methodName : function() { 代码行 }`
+```javascript
+// 创建对象：
+var person = {
+    firstName: "Bill",
+    lastName : "Gates",
+    id       : 12345,
+    //对象方法
+    fullName : function() {
+       return this.firstName + " " + this.lastName;
+    }
+};
+```
+- 访问对象方法
+`objectName.methodName()`
+
+- 使用内建方法
+使用 String 对象的 toUpperCase() 方法，把文本转换为大写：
+```javascript
+var message = "Hello world!";
+var x = message.toUpperCase();
+```
+- 添加新的方法
+向对象添加方法是在构造器函数内部完成的：
+```javascript
+function person(firstName, lastName, age, eyeColor) {
+    this.firstName = firstName;  
+    this.lastName = lastName;
+    this.age = age;
+    this.eyeColor = eyeColor;
+    this.changeName = function (name) {
+        this.lastName = name;
+    };
+}
 ```

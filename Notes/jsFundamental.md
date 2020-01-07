@@ -1113,3 +1113,52 @@ function person(firstName, lastName, age, eyeColor) {
     };
 }
 ```
+------
+##### 22.函数
+在js中，函数 是对象的方法。
+##### call()
+- `call()`可以用来调用所有者对象作为参数的方法。通过`call()`可以使用属于另一个对象的方法。
+```javascript
+var person = {
+    fullName: function() {
+        return this.firstName + " " + this.lastName;
+    }
+}
+var person1 = {
+    firstName:"Bill",
+    lastName: "Gates",
+}
+var person2 = {
+    firstName:"Steve",
+    lastName: "Jobs",
+}
+//调用 person 的 fullName 方法，并用于 person1
+person.fullName.call(person1);  // return "Bill Gates"
+```
+- 带参数的`call()`
+```javascript
+var person = {
+  fullName: function(city, country) {
+    return this.firstName + " " + this.lastName + "," + city + "," + country;
+  }
+}
+var person1 = {
+  firstName:"Bill",
+  lastName: "Gates"
+}
+person.fullName.call(person1, "Seattle", "USA");
+```
+
+---
+##### allpy()
+通过 `apply()` 方法，能够编写用于不同对象的方法。
+-  `call()` 和 `apply()` 之间的区别:
+`call()` 方法分别接受参数。
+`apply()` 方法接受数组形式的参数。
+
+JS中数组没有`Math.max()`方法，所哟可以用
+`Math.max.apply(null,[1,2,3])`
+`Math.max(...arrayName)`
+
+---
+##### 闭包

@@ -1200,3 +1200,82 @@ HTML DOM 是 HTML 的标准对象模型和编程接口。它定义了：
 
 
 `getElementById` 方法
+`querySelectorAll()`
+
+`onload` 和 `onunload` 事件
+`onchange` 事件
+`onchange` 事件经常与输入字段验证结合使用。
+
+`onmousedown`, `onmouseup` 以及 `onclick `事件
+`onmousedown`, `onmouseup` 以及 `onclick `事件构成了完整的鼠标点击事件。
+
+首先当鼠标按钮被点击时，`onmousedown `事件被触发；然后当鼠标按钮被释放时，`onmouseup` 事件被触发；最后，当鼠标点击完成后，`onclick `事件被触发。
+
+**事件冒泡还是事件捕获？**
+在 HTML DOM 中有两种事件传播的方法：冒泡和捕获。
+事件传播是一种定义当发生事件时元素次序的方法。假如 `<div> `元素内有一个 `<p>`，然后用户点击了这个 `<p> `元素，应该首先处理哪个元素`“click”`事件？
+
+在冒泡中，最内侧元素的事件会首先被处理，然后是更外侧的：首先处理 `<p>` 元素的点击事件，然后是 `<div> `元素的点击事件。
+在捕获中，最外侧元素的事件会首先被处理，然后是更内侧的：首先处理 `<div>` 元素的点击事件，然后是` <p> `元素的点击事件。
+
+事件监听`addEventListener`能够让多个事件依次发生，否则一般情况下，如果给一个dom对象绑定同一个事件，只有最后一个会生效。
+
+`document.body`/`document.documentElement`可以访问完整文档
+
+
+**`nodeName` 属性**
+`nodeName` 属性规定节点的名称。
+
+`nodeName` 是只读的
+元素节点的 `nodeName `等同于标签名
+属性节点的 `nodeName` 是属性名称
+文本节点的 `nodeName` 总是 #text
+文档节点的 `nodeName `总是 #document
+
+**DOM节点**
+1. 创建新的HTML节点
+```javascript
+//创建p元素
+var p = document.createElement("p");
+//增加文本节点
+var node = document.createTextNode("text");
+//将文本节点添加到p元素
+p.appendChild(node);
+
+//将p元素添加到已有元素
+existElement.append(p);
+```
+2. `insertBefore()`
+```javascript
+//在父元素existElement中的p1元素前添加pNew元素
+existElement.insertBefore(pNew,p1);
+```
+3. 删除已有HTML元素
+删除某个元素的时候，我们需要知道它的父元素。
+```javascript
+parent.removeChild(child);
+```
+    可以通过`parentNode`属性快速找到元素的父元素
+```javascript
+child.parentNode.removeChild(child);
+```
+
+4. 替换HTML元素
+在`parent`元素中，使用新元素`pNEW`替换原来的`p1`元素
+```javascript
+parent.replaceChild(pNew, p1);
+```
+5. 使用`getElementByTagName()`返回HTML Collection集合对象，HTML Collection具有length属性，可以遍历元素，但它并不是数组。
+```javascript
+var x = document.getElementsByTagName("p");
+y = x[1];
+```
+
+6. NodeList
+访问 HTMLCollection 项目，可以通过它们的名称、id 或索引号。
+访问 NodeList 项目，只能通过它们的索引号。
+只有 NodeList 对象能包含属性节点和文本节点。
+```javascript
+//选取所有p节点
+var myNodeList = document.querySelectorAll("p");
+```

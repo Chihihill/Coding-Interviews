@@ -1114,7 +1114,7 @@ function person(firstName, lastName, age, eyeColor) {
 }
 ```
 ------
-##### 22.函数
+#### 22.函数
 在js中，函数 是对象的方法。
 ##### call()
 - `call()`可以用来调用所有者对象作为参数的方法。通过`call()`可以使用属于另一个对象的方法。
@@ -1179,7 +1179,7 @@ JS中数组没有`Math.max()`方法，所以可以用
 2 让这些变量的值始终保持在内存中； e.g.计数器
 
 -----
-#### HTML DOM
+#### 23.HTML DOM
 
 DOM 是一项 W3C (World Wide Web Consortium) 标准。
 
@@ -1279,3 +1279,100 @@ y = x[1];
 //选取所有p节点
 var myNodeList = document.querySelectorAll("p");
 ```
+
+----
+#### 24.Browser BOM
+
+**window对象**
+全局变量是window对象的属性
+全局函数是window对象的方法
+
+**窗口尺寸**
+这两个属性都以像素返回尺寸：
+window.innerHeight - 浏览器窗口的内高度（以像素计）
+window.innerWidth - 浏览器窗口的内宽度（以像素计）
+浏览器窗口（浏览器视口）不包括工具栏和滚动条。
+```javascript
+var w = window.innerWidth
+|| document.documentElement.clientWidth
+|| document.body.clientWidth;
+
+var h = window.innerHeight
+|| document.documentElement.clientHeight
+|| document.body.clientHeight;
+
+var x = document.getElementById("demo");
+x.innerHTML = "浏览器内窗宽度：" + w + "，高度：" + h + "。";
+```
+
+`window.open()` - 打开新窗口
+`window.close()` - 关闭当前窗口
+`window.moveTo()` -移动当前窗口
+`window.resizeTo()` -重新调整当前窗口
+
+**window.screen**
+`screen.width` 访问者屏幕宽度
+`screen.height` 访问者屏幕的高度
+`screen.availWidth` 可用宽度
+`screen.availHeight` 可用高度
+`screen.colorDepth` 色彩分辨率
+`screen.pixelDepth` 色彩分辨率
+
+**window Location**
+对象可用于获取当前页面地址（URL）并把浏览器重定向到新页面。
+
+`window.location.href` 返回当前页面的 href (URL)
+`window.location.hostname` 返回 web 主机的域名
+`window.location.pathname` 返回当前页面的路径或文件名
+`window.location.port` 属性返回（当前页面的）互联网主机端口的编号。
+`window.location.protocol` 返回使用的 web 协议（http: 或 https:）
+`window.location.assign` 加载新文档
+
+**window History**
+`window.history `对象包含浏览器历史。
+为了保护用户的隐私，`JavaScript` 访问此对象存在限制。
+`history.back()` - 等同于在浏览器点击后退按钮
+`history.forward()` - 等同于在浏览器中点击前进按钮
+
+**window navigator**
+`window.navigator `对象包含有关访问者的信息。
+`navigator.appName`
+`navigator.appCodeName`
+`navigator.platform`
+
+**JavaScript 有三种类型的弹出框：警告框、确认框和提示框**
+`window.alert("")`
+`window.confirm("confirm text")`
+`window.prompt("sometext","defaultInputText");`
+
+**JavaScript Timing 事件**
+`JavaScript` 可以在时间间隔内执行。
+```javascript
+setTimeout(function, milliseconds)
+//在等待指定的毫秒数后执行函数。
+
+setInterval(function, milliseconds)
+//等同于 setTimeout()，但持续重复执行该函数
+```
+`setTimeout() `和 `setInterval()` 都属于` HTML DOM Window` 对象的方法。
+
+`clearTimeout()` 方法停止执行 `setTimeout() `中规定的函数。
+```javascript
+myVar = setTimeout(function, milliseconds);
+clearTimeout(myVar);
+```
+
+**`setInterval()`**
+```javascript
+var myVar = setInterval(myTimer, 1000);
+ 
+function myTimer() {
+    var d = new Date();
+    document.getElementById("demo").innerHTML = d.toLocaleTimeString();
+}
+```
+
+**cookie**
+
+----
+#### 25.AJAX

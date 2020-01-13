@@ -14,3 +14,5 @@ And links below are for reference.
 
 ## JavaScript
 >[01.Closure](http://www.ruanyifeng.com/blog/2009/08/learning_javascript_closures.html)
+
+>[02.ECMAScript 6](https://es6.ruanyifeng.com/)

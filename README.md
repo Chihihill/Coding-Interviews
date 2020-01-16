@@ -16,3 +16,5 @@ And links below are for reference.
 >[01.Closure](http://www.ruanyifeng.com/blog/2009/08/learning_javascript_closures.html)
 
 >[02.ECMAScript 6](https://es6.ruanyifeng.com/)
+
+>[03.TypeScript](https://github.com/Chihihill/typescript-tutorial/blob/master/README.md)

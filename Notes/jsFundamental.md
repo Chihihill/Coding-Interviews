@@ -1376,3 +1376,4 @@ function myTimer() {
 
 ----
 #### 25.AJAX
+asynchronous 异步

@@ -7,7 +7,7 @@ This is personal analysis, solution and record mainly for algorithms learning.
 
 And links below are for reference.
 
-## Data Structure and Algorithm 
+## Data Structure and Algorithm
 >[01.Basic Binary tree](https://www.jianshu.com/p/bf73c8d50dc2)
 
 >[02.Bit Operation](https://www.jianshu.com/p/36ba5d65804f)
@@ -26,4 +26,5 @@ And links below are for reference.
 
 ## CSS & HTML
 >[01.1 css position](http://zh.learnlayout.com/position.html)
->[01.2 css position](https://developer.mozilla.org/zh-CN/docs/Web/CSS/position) 
+
+>[01.2 css position](https://developer.mozilla.org/zh-CN/docs/Web/CSS/position)

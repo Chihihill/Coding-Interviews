@@ -70,6 +70,7 @@
         text = "今天是周末~";
         break;
 ```
+
 ---
 ##### 3.循环
 1. `for `- 多次遍历代码块
@@ -105,6 +106,7 @@
     }
     while(i<10);
 ```
+
 ---
 ##### 4.break vs continue
 `break`用于跳出循环
@@ -142,6 +144,7 @@
         text += cars[5] + "<br>"; 
     }
 ```
+
 -----
 ##### 5.js类型转换
 
@@ -233,6 +236,7 @@ null 的数据类型是对象
 - 自动类型转换
 如果 JavaScript 尝试操作一种“错误”的数据类型，它会试图将该值转换为“正确”的类型。
 JavaScript 自动调用变量的 toString() 函数，当您试图“输出”对象或变量时。
+
 ---
 ##### 6.位运算符
 
@@ -282,6 +286,7 @@ JavaScript 自动调用变量的 toString() 函数，当您试图“输出”对
 `parseInt()`返回数值
 2. 进制转换（接收两个参数)
 `parseInt(string, radix)`可接收两个参数，`parseInt(0101,2) //返回5`
+
 ---
 ##### 7.正则表达式
 正则表达式是构成搜索模式的字符序列，可用于文本搜索和文本替换操作。
@@ -349,6 +354,7 @@ JavaScript 自动调用变量的 toString() 函数，当您试图“输出”对
     obj.input
     //"The best things in life are free!"
 ```
+
 ---
 ##### 8.异常
 `try` 语句使您能够测试代码块中的错误。
@@ -458,6 +464,7 @@ function myFunction() {
 </body>
 </html>
 ```
+
 ----
 ##### 9.作用域
 1. 作用域是指有权访问的变量集合，`js`中有两种作用域：
@@ -478,6 +485,7 @@ function myFunction() {
 - 局部变量会在函数完成时被删除。
 - 全局变量会在您关闭页面是被删除。
 - 函数参数也是函数内的局部变量。
+
 ---
 ##### 10.提升Hoisting
 - 在 JavaScript 中，可以在使用变量之后对其进行声明。即可以在声明变量之前使用它。
@@ -487,6 +495,7 @@ function myFunction() {
 - 用 `let `或 `const` 声明的变量和常量不会被提升
 - 始终在每个作用域的开头声明所有变量!
 - 严格模式中不允许使用未声明的变量
+
 ----
 ##### 11.严格模式
 - `"use strict"; `定义 `JavaScript` 代码应该以“严格模式”执行。
@@ -554,6 +563,7 @@ function myFunction() {
     }
     person1.fullName.call(person2);  // 会返回 "Bill Gates"
 ```
+
 ##### 13.let & const
 `let`和`const`为j`s`提供了块级作用域变量，在这之前`js`只有全局作用域和函数作用域。
 - 全局（在函数之外）声明的变量拥有全局作用域。全局变量可以在 JavaScript 程序中的任何位置访问。
@@ -791,8 +801,10 @@ JavaScript 函数 JSON.parse() 用于将文本转换为 JavaScript 对象：
     document.getElementById("demo").innerHTML = person.language;
 ```
 - `charAt()`
+
 -----
 ##### 17.ES6
+
 -----
 ##### 18.JSON
 
@@ -844,6 +856,7 @@ document.getElementById("demo").innerHTML =
 obj.employees[1].firstName + " " + obj.employees[1].lastName;
 </script> 
 ```
+
 ------
 ##### 19.JS表单
 HTML 表单验证能够通过 JavaScript 来完成。
@@ -921,6 +934,7 @@ HTML5 引入了一种新的 HTML 验证概念，名为约束验证（constraint 
 `:optional`	选择未设置 "required" 属性的 input 元素。
 `:required`	选择设置了 "required" 属性的 input 元素。
 `:valid	`选择带有有效值的 input 元素。
+
 ----
 ##### 20.表单API
 - 约束验证 DOM 方法
@@ -977,6 +991,7 @@ function myFunction() {
 }
 </script> 
 ```
+
 ----
 #### 21.对象Object
 ##### 定义
@@ -1113,6 +1128,7 @@ function person(firstName, lastName, age, eyeColor) {
     };
 }
 ```
+
 ------
 #### 22.函数
 在js中，函数 是对象的方法。

@@ -23,5 +23,37 @@
 --------
   
 ## ECMAScript语法基础
-**区分大小写**
-标识符
+- 区分大小写
+- 严格模式
+- 松散类型的变量
+不建议修改变量所保存的值的类型
+- 局部变量VS全局变量
+`var`所定义的变量是局部变量
+- 数据类型
+  5种基本数据类型：`Undefined、Null、Boolean、String、Number`
+  1种复杂数据类型：`Object`
+  - `typeof`检查数据类型
+  ```jacascript
+  typeof null; //object
+  ```
+  - `null`可以用来检查变量是否是对象
+  - `null == undefined`
+  - `NaN != NaN`
+  - 把非数值转换为数值类型`Number() / parseInt() / parseLooat()`
+  - `toString() VS String()`
+  - **`Object()`**
+- 操作符
+  - 位操作符
+    - 按位非`~`
+    - 按位与`&`
+    - 按位或`|`
+    - 按位异或`^`
+    - 左移`<<`
+    - 有符号右移`>>` （以符号位填充）
+    - 无符号右移`>>>` （以0填充）
+  - 布尔操作符
+    - 逻辑非
+    - 逻辑与
+    - 逻辑或
+
+
